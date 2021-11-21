@@ -105,17 +105,18 @@ def crawl(page_url):
 
 if __name__ == '__main__':
     # 先清空 txt
-    product_url_txt = open('./product_url_women.txt', 'w').close()
-    product_url_txt = open('./product_url_women.txt', 'a')
-    # print(os.path.abspath)
     path = 'D:\\Machine_Learning_note\\DM'
+    product_url_txt = open(path+'\\product_url_women_Crwal.txt', 'w').close()
+    product_url_txt = open(path+'\\product_url_women_Crwal.txt', 'a')
+    # print(os.path.abspath)
     file = open(path+"\\asos_category_url.txt")
     # url = 'http://www.hm.com/hk/en/product/54618?article=54618-B&pge=1/&pgesize=204'
     lines = file.readlines()
     file.close()
 
-    threadList = ["Thread-1", "Thread-2", "Thread-3", "Thread-4", "Thread-5", "Thread-6", "Thread-7", "Thread-8",
-                  "Thread-9", "Thread-10"]
+    # threadList = ["Thread-1", "Thread-2", "Thread-3", "Thread-4", "Thread-5", "Thread-6", "Thread-7", "Thread-8",
+    #               "Thread-9", "Thread-10"]
+    threadList = ["Thread-1", "Thread-2","Thread-3"]
     nameList = lines
     queueLock = threading.Lock()
     workQueue = queue.Queue(len(nameList) + len(threadList))

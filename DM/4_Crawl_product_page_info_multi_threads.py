@@ -65,7 +65,7 @@ def saveImgs(driver, img_path, img_url_list):
 
 def craw_product_contents(product_url):
     product_info_list = []
-    driver = webdriver.Chrome()
+    driver = webdriver.Edge()
 
     driver.get(product_url)
 
@@ -183,17 +183,17 @@ def craw_product_contents(product_url):
     product_info_list.append(product_colour)
 
     # threre are at most 3 right-arrow button, click it if it is clickable
-    right_arrows = driver.find_elements_by_xpath("//a[@class='arrow right-arrow active']")
-    if len(right_arrows) > 1:
-        right_arrows[1].click()
-        right_arrows[1].click()
-        right_arrows[1].click()
-        right_arrows[1].click()
-    if len(right_arrows) > 2:
-        right_arrows[2].click()
-        right_arrows[2].click()
-        right_arrows[2].click()
-        right_arrows[2].click()
+    # right_arrows = driver.find_elements_by_xpath("//a[@class='arrow right-arrow active']")
+    # if len(right_arrows) > 1:
+    #     right_arrows[1].click()
+    #     right_arrows[1].click()
+    #     right_arrows[1].click()
+    #     right_arrows[1].click()
+    # if len(right_arrows) > 2:
+    #     right_arrows[2].click()
+    #     right_arrows[2].click()
+    #     right_arrows[2].click()
+    #     right_arrows[2].click()
 
     # buy the look
     buy_the_look_list = ''
@@ -235,10 +235,10 @@ def craw_product_contents(product_url):
     img_number = saveImgs(driver, ROOTPATH + img_path + '/' + str(url_product_id) + "/", img_url_list)
     product_info_list.append(img_number)
     product_info_list.append(img_path + '/' + str(url_product_id) + "/")
-
+    print(product_info_list)
     # save the info on file
     text_content = [repr(str(i)) for i in product_info_list]
-    with open('C:/Users/duanchenghua/source/repos/PycharmProjects/AI/ASOS/text_content.txt', 'a', encoding='utf8') as f:
+    with open('D:\\Machine_Learning_note\\DM\\text_content2.txt', 'a', encoding='utf-8') as f:
         f.write('\t'.join(text_content) + '\n')
 
     #     product_details_data = (url_product_id, breadcrumb, product_url, product_url_stat, product_code, product_website,
@@ -253,15 +253,16 @@ def craw_product_contents(product_url):
 #     db.commit()#需要这一句才能保存到数据库中
 
 if __name__ == '__main__':
-    product_URLs = open("C:/Users/duanchenghua/source/repos/PycharmProjects/AI/ASOS/product_url.txt").readlines()
-    ROOTPATH = "C:/Users/duanchenghua/source/repos/PycharmProjects/AI/ASOS/"
+    product_URLs = open("D:\\Machine_Learning_note\\DM\\product_url.txt").readlines()
+    ROOTPATH = "D:\\Machine_Learning_note\\DM\\"
 
     #     db = pymysql.connect("localhost","root","123456","testdb", charset="utf8")
     #     cursor = db.cursor()
     #
-    threadList = ["Thread-1", "Thread-2", "Thread-3", "Thread-4", "Thread-5", "Thread-6", "Thread-7", "Thread-8",
-                  "Thread-9", "Thread-10", "Thread-11", "Thread-12", "Thread-13", "Thread-14", "Thread-15", "Thread-16",
-                  "Thread-17", "Thread-18", "Thread-19", "Thread-20"]
+    threadList = ["Thread-1", "Thread-2", "Thread-3", "Thread-4", "Thread-5"]
+    # , "Thread-6", "Thread-7", "Thread-8",
+    #               "Thread-9", "Thread-10", "Thread-11", "Thread-12", "Thread-13", "Thread-14", "Thread-15", "Thread-16",
+    #               "Thread-17", "Thread-18", "Thread-19", "Thread-20"]
 
     queueLock = threading.Lock()
     workQueue = queue.Queue(len(product_URLs) + len(threadList))

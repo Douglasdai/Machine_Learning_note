@@ -7,7 +7,7 @@ import urllib
 from selenium import webdriver
 
 ISOTIMEFORMAT = '%Y-%m-%d %X'  # Time setup
-ROOTPATH = 'C:/Users/duanchenghua/source/repos/PycharmProjects/AI/ASOS/'
+ROOTPATH = 'D:\\Machine_Learning_note\\DM'
 
 
 def saveImgs(driver, img_path, img_url_list):
@@ -28,25 +28,25 @@ def craw_product_contents(product_url):
     #     driver = webdriver.PhantomJS()
     #     driver = webdriver.Firefox()
     driver.get(product_url)
-
+    
     # change the local country
-    country_element = driver.find_element_by_xpath("//a[@class='currency-locale-link']")
-    country_element.click()
-    driver.implicitly_wait(4)  # wait 4 seconds.
-    country_element = driver.find_element_by_xpath(
-        "//div[@class='currency-list']/select/option[@data-label='HKD']").click()
+    # country_element = driver.find_element_by_xpath("//a[@class='currency-locale-link']")
+    # country_element.click()
+    driver.implicitly_wait(2)  # wait 4 seconds.
+    # country_element = driver.find_element_by_xpath(
+    #     "//div[@class='currency-list']/select/option[@data-label='HKD']").click()
 
     url_product_id = re.findall(r'[0-9]{8}', product_url)[0]
     product_info_list.append(url_product_id)
 
     # show more
-    show_more = driver.find_element_by_xpath("//a[@class='show']")
+    show_more = driver.find_element_by_xpath("//div[@class='show-more']")
     if show_more.is_enabled():
         show_more.click()
 
-    # breadcrumb
+    # breadcrumb  #TODO
     breadcrumb = ''
-    breadcrumb_eles = driver.find_elements_by_xpath("//div[@id='breadcrumb']/ul/li")
+    breadcrumb_eles = driver.find_elements_by_xpath("//nav[@class='_1MMuO3r']/ol/li")
     for breadcrumb_ele in breadcrumb_eles:
         breadcrumb = breadcrumb + breadcrumb_ele.text + '/'
     breadcrumb = breadcrumb.strip('/')
@@ -59,9 +59,9 @@ def craw_product_contents(product_url):
     product_url_stat = 1
     product_info_list.append(product_url_stat)
 
-    # product code
+    # product code  正确的
     product_code = ''
-    product_code = driver.find_element_by_xpath("//div[@class='product-code']/span").text
+    product_code = driver.find_element_by_xpath("//div[@class='product-code']/p").text
     product_info_list.append(product_code)
 
     # product website
@@ -88,26 +88,26 @@ def craw_product_contents(product_url):
     product_title = ''
     product_title = driver.find_element_by_xpath("//div[@class='product-hero']/h1").text
     product_info_list.append(product_title)
-
+   
     # product delivery
     product_delivery = ''
-    product_delivery = driver.find_element_by_xpath("//a[@class='product-delivery']").text
+    product_delivery = driver.find_element_by_xpath("//span[@class='ds110 product-delivery-van']").text
     product_info_list.append(product_delivery)
 
     # product price
     product_price = 0
-    product_price = driver.find_element_by_xpath("//span[@class='current-price']").text
+    product_price = driver.find_element_by_xpath("//span[@data-id='current-price']").text
     product_info_list.append(product_price)
 
-    # product description
+    # product description   #TODO
     product_description = ''
-    product_description = driver.find_element_by_xpath("//div[@class='product-description']/span").text.strip()
+    product_description = driver.find_element_by_xpath("//div[@class='product-description']/ul/li").text.strip()
     # product about product material
     product_material = ''
-    product_material = driver.find_element_by_xpath("//div[@class='about-me']/span").text.strip()
+    product_material = driver.find_element_by_xpath("//div[@class='about-me']").text.strip()
     product_description = product_material + ';;' + product_description
     product_info_list.append(product_description.strip(';;'))
-
+    #TODO
     # product select size can be null
     size = ''
     product_size = driver.find_element_by_xpath("//div[@class='colour-size-select']").find_elements_by_xpath(
@@ -118,16 +118,16 @@ def craw_product_contents(product_url):
     size = size.strip(';;')
     product_info_list.append(size)
 
-    # product care INFO
+    # product care INFO #TODO
     product_care = ''
-    product_care = driver.find_element_by_xpath("//div[@class='care-info']/span").text.strip()
+    product_care = driver.find_element_by_xpath("//div[@class='care-info']/p").text.strip()
     product_info_list.append(product_care)
-
+    
     # product colour
     product_colour = ''
     product_colour = driver.find_element_by_xpath("//span[@class='product-colour']").text
     product_info_list.append(product_colour)
-
+    
     # product IMGs
     img_url_list = []
     ele_imgs = driver.find_elements_by_xpath("//img[@class='gallery-image']")
@@ -139,38 +139,38 @@ def craw_product_contents(product_url):
     if len(breadcrumb) > 0:
         img_path = '/'.join(breadcrumb.split('/')[0:-1])
 
-    img_number = saveImgs(driver, ROOTPATH + breadcrumb + '/' + str(url_product_id) + "/", img_url_list)
+    img_number = saveImgs(driver, ROOTPATH + breadcrumb + '\\' + str(url_product_id) + "\\", img_url_list)
     product_info_list.append(img_number)
 
     # threre are at most 3 right-arrow button, click it if it is clickable
-    right_arrows = driver.find_elements_by_xpath("//a[@class='arrow right-arrow active']")
-    if len(right_arrows) == 2:
-        right_arrows[1].click()
-        right_arrows[1].click()
-        right_arrows[1].click()
-        right_arrows[1].click()
-    if len(right_arrows) == 3:
-        right_arrows[1].click()
-        right_arrows[1].click()
-        right_arrows[1].click()
-        right_arrows[1].click()
+    # right_arrows = driver.find_elements_by_xpath("//a[@class='arrow right-arrow active']")
+    # if len(right_arrows) == 2:
+    #     right_arrows[1].click()
+    #     right_arrows[1].click()
+    #     right_arrows[1].click()
+    #     right_arrows[1].click()
+    # if len(right_arrows) == 3:
+    #     right_arrows[1].click()
+    #     right_arrows[1].click()
+    #     right_arrows[1].click()
+    #     right_arrows[1].click()
     # buy the look
     buy_the_look_list = ''
     look_list = []
-    buy_the_look_componet = driver.find_element_by_xpath("//div[@class='component buy-the-look']")
-    buy_the_look = buy_the_look_componet.find_elements_by_xpath("//div[@class='btl-product-details']/a")
+    buy_the_look_componet = driver.find_element_by_xpath("//section[@data-test-id='buyTheLookCarousel']")
+    buy_the_look = buy_the_look_componet.find_elements_by_xpath("//ul[@class='_1DrUB']/li/div/div/a")
     for ele in buy_the_look:
         if ele.get_attribute('href') is not None and 'complete' in ele.get_attribute('href'):
             if ele.get_attribute('href') not in look_list:
                 look_list.append(ele.get_attribute('href'))
     buy_the_look_list = ';;'.join(look_list)
     product_info_list.append(buy_the_look_list)
-
+   
     # you may also like
     you_may_also_like_list = ''
     like_list = []
-    you_may_also_like_component = driver.find_element_by_xpath("//div[@class='component might-like']")
-    you_may_also_like = you_may_also_like_component.find_elements_by_xpath("//ul[@class='slide-panel']/li/a")
+    you_may_also_like_component = driver.find_element_by_xpath("//section[@data-test-id='mightLikeCarousel']")
+    you_may_also_like = you_may_also_like_component.find_elements_by_xpath("//ul[@class='_1DrUB']/li/div/a")
 
     for ele in you_may_also_like:
         if ele.get_attribute('href') is not None and 'recommend' in ele.get_attribute('href'):
@@ -184,10 +184,15 @@ def craw_product_contents(product_url):
     #                             product_title, product_delivery, product_price, product_description, size,
     #                             product_care, product_colour, img_number, buy_the_look_list, you_may_also_like_list)
     #     driver.quit()
-    return product_info_list
-
-
+    print(product_info_list)
+    with open('D:\\Machine_Learning_note\\DM\\product_info_list.txt', 'a',encoding='utf-8')as f:
+        for product_info in product_info_list:
+            f.write(str(product_info))
+            f.write(',')
+    
+        
 if __name__ == '__main__':
-    driver = webdriver.Chrome()
-    product_data = craw_product_contents(
-        'https://www.asos.com/asos-design/asos-design-skinny-western-denim-jacket-in-white/prd/11960695?colourwayid=16389182&SearchQuery=&cid=13517')
+    driver = webdriver.Edge()
+    craw_product_contents(
+    'https://www.asos.com/asos-design/asos-design-tux-mini-dress-with-open-back-in-pink/prd/21785034?colourwayid=60223691&cid=5235')
+        #'https://www.asos.com/asos-design/asos-design-skinny-western-denim-jacket-in-white/prd/11960695?colourwayid=16389182&SearchQuery=&cid=13517')
