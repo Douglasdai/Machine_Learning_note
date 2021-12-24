@@ -4,6 +4,10 @@
 +  HW_7包含了 7-9的
 +  DM 是数据挖掘，包含爬虫，爬取了ASOS 网站
 +  DM_ex2 为数据可视化的一些操作 使用了 echart 库，并对数据进行逻辑回归，进行离职员工的预测
++  NLP 文件夹中包含了对[fake and true news](https://www.kaggle.com/clmentbisaillon/fake-and-real-news-dataset) 数据集的分类任务
+    + 带有bert 的文件需要在大显存的条件下运行，否则爆显存
+    + bert 文件以复现kaggle的 代码，目前没有什么改动，主要任务为看懂 了解nlp的几种方法
+    + 其他的可以正常运行
 +  DL_train_all 该文件夹很杂乱，包含了很多内容
     +  BP 为 BP网络对电力预测 
     +  cat_dog_50 为使用了kaggle cat vsdog 数据集，对数据二分类，读取数据时截取为50*50的灰度图像
