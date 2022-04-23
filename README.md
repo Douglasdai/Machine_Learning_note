@@ -20,3 +20,6 @@
     +  ele_lstm 对power.csv 进行电力预测，成功运行，有可视化
     + PCA_Kmeans 手动实现PCA 降维，然后喂到K_means中去，进行聚类，使用数据集（iris,wine,digits）
     + sklearn_Dtree 使用了 sklearn中的决策树函数，并对所建的决策树进行可视化，直观看到决策树
+
++ Brain包含了对脑肿瘤的分类和分割代码，使用的数据集为[kaggle数据集(分类)](https://www.kaggle.com/datasets/navoneel/brain-mri-images-for-brain-tumor-detection/code)和[数据集2(用于分割)](https://www.kaggle.com/datasets/awsaf49/brats20-dataset-training-validation),目的：完成非限作业.
+  
