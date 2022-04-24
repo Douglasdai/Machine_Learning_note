@@ -1,5 +1,5 @@
 ## Machine_Learning_note
-### 复现李宏毅深度学习2020作业，并且完成CQU机器学习作业，外加完成一些ML，或DL的任务
+### 复现李宏毅深度学习2020作业，并且完成CQU机器学习作业，完成一些ML，DL，NLP的任务
 +  HW_1 不光有李宏毅的作业1，还有自己手动实现的线性回归和逻辑回归，外加使用torch模型进行训练
 +  HW_7包含了 7-9的
 +  DM 是数据挖掘，包含爬虫，爬取了ASOS 网站
@@ -7,7 +7,7 @@
 +  NLP 文件夹中包含了对[fake and true news](https://www.kaggle.com/clmentbisaillon/fake-and-real-news-dataset) 数据集的分类任务
     + 带有bert 的文件需要在大显存的条件下运行，否则爆显存
     + bert 文件以复现kaggle的 代码，目前没有什么改动，主要任务为看懂 了解nlp的几种方法
-    + 其他的可以正常运行
+    + 更新对fake and real news 和yelp 数据集的CNN文本分类方法：nlp_cls.ipynb 和nlp_cnn_yelp.ipynb文件
 +  DL_train_all 该文件夹很杂乱，包含了很多内容
     +  BP 为 BP网络对电力预测 
     +  cat_dog_50 为使用了kaggle cat vsdog 数据集，对数据二分类，读取数据时截取为50*50的灰度图像
