@@ -1,0 +1,6 @@
+/HUSHEN/*
+.idea/*
+/NLP/bert_weights.pt
+/DL_train_all/cnn_multi_cls.pth
+/CV/.vscode/*
+/CV/model/*
